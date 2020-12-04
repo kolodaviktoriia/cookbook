@@ -1,17 +1,17 @@
 <template>
   <div class="recipe">
     <div class="recipe-wrapper">
-      <div class="addRecipes">
-        <div class="btnWrap">
-          <button @click="showModal" class="btnOpen">Edit</button>
-        </div>
-      </div>
       <div class="title-recipe">
         {{ currentRecipe.title }}
+        <div class="addRecipes">
+          <div class="btnWrap">
+            <button @click="showModal" class="btnOpen">Edit</button>
+          </div>
+        </div>
       </div>
       <div class="main-recipe">
         <div class="ingredients-recipe">
-          <h3>Ingredients</h3>
+          <h3 class="title">Ingredients</h3>
           {{ currentRecipe.ingredients }}
         </div>
         <div class="description-recipe">
@@ -58,7 +58,7 @@
         <div class="modal-footer">
           <div class="modal-btn">
             <button @click="closeModal" class="btnCancel">Cancel</button>
-            <button @click="addRecipes" class="btnEdit">Edit recipe</button>
+            <button @click="editRecipes" class="btnEdit">Edit recipe</button>
           </div>
         </div>
       </div>
@@ -83,9 +83,10 @@ export default {
     ...mapState(['currentRecipe'])
   },
   methods: {
-    ...mapActions(['addRecipe']),
-    addRecipes () {
-      this.addRecipe({
+    ...mapActions(['editRecipe']),
+    editRecipes () {
+      this.editRecipe({
+        id: this.currentRecipe.id,
         title: this.title,
         ingredients: this.ingredients,
         description: this.description
@@ -94,6 +95,9 @@ export default {
     },
     showModal () {
       this.isOpen = true
+      this.title = this.currentRecipe.title
+      this.ingredients = this.currentRecipe.ingredients
+      this.description = this.currentRecipe.description
     },
     closeModal () {
       this.isOpen = false
@@ -122,6 +126,8 @@ export default {
   font-weight: bold;
   border-bottom: 2px solid #7a75756e;
   padding: 10px;
+  display: flex;
+  justify-content: space-between;
 }
 .main-recipe {
   min-height: 200px;
@@ -251,5 +257,9 @@ export default {
 .btnAdd:hover,
 .btnOpen:hover {
   background: #dededeb8;
+}
+.title {
+  margin: 0 0 10px 0;
+  padding: 0;
 }
 </style>

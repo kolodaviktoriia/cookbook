@@ -8,15 +8,30 @@
         <div class="modal-body">
           <div class="input-div">
             <label class="input-label">Title:</label>
-            <input class="input-title" type="text" placeholder="Add title" v-model="title" />
+            <input
+              class="input-title"
+              type="text"
+              placeholder="Add title"
+              v-model="title"
+            />
           </div>
           <div class="input-div">
             <label class="input-label">Ingredients:</label>
-            <textarea class="input-ingredients" type="text" placeholder="Add ingredients" v-model="ingredients" />
+            <textarea
+              class="input-ingredients"
+              type="text"
+              placeholder="Add ingredients"
+              v-model="ingredients"
+            />
           </div>
           <div class="input-div">
             <label class="input-label">Description:</label>
-            <textarea class="input-description" type="text" placeholder="Add description" v-model="description" />
+            <textarea
+              class="input-description"
+              type="text"
+              placeholder="Add description"
+              v-model="description"
+            />
           </div>
         </div>
         <div class="modal-footer">

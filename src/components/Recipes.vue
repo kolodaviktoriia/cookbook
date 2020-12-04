@@ -10,7 +10,7 @@
       </div>
       <div class="main-recipe">
         <div class="ingredients-recipe">
-          <h3>Ingredients</h3>
+          <h3 class="title">Ingredients</h3>
           {{ recipe.ingredients }}
         </div>
         <div class="description-recipe">
@@ -60,6 +60,8 @@ export default {
   font-weight: bold;
   border-bottom: 2px solid #7a75756e;
   padding: 10px;
+  display: flex;
+  justify-content: space-between;
 }
 .main-recipe {
   min-height: 200px;
@@ -77,5 +79,9 @@ export default {
   width: 50%;
   min-height: 100%;
   border-left: 2px solid #7a75756e;
+}
+.title {
+  margin: 0 0 10px 0;
+  padding: 0;
 }
 </style>
