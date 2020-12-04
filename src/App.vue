@@ -18,7 +18,7 @@ export default {
   height: 90px;
 }
 #header-wrapper{
-  padding: 50px 50px 0px 50px;
+  padding: 50px 150px 0px 150px;
 }
 #header{
   padding: 20px;
@@ -40,7 +40,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #262626;
   background: #d9d9d973 ;
 }
 body{

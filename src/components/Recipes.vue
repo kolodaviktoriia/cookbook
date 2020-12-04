@@ -14,8 +14,6 @@
       </div>
       </div>
     </div>
-    <ul>
-    </ul>
   </div>
 </template>
 
@@ -41,14 +39,14 @@ export default {
 <style scoped>
 .recipes{
   max-height: 50vh;
+  width: 70%;
   overflow: auto;
-  margin: 0 250px;
 }
   .recipe-wrapper{
     background: #ffff;
     border-radius: 5px;
     padding: 10px 0;
-    margin: 25px 0;
+    margin-bottom: 25px;
   }
   .title-recipe{
   font-family: Avenir, Helvetica, Arial, sans-serif;
