@@ -1,15 +1,16 @@
 <template>
   <div class="recipesList">
-  <h3>All recipes</h3>
-  <ul>
-    <li
-      class="recipeItem"
-      v-for="(r, index) in recipes"
-      v-bind:key="index"
-      @click="openDetails(r)">
-        {{r.title}}
-   </li>
-   </ul>
+    <h3>All recipes</h3>
+    <ul>
+      <li
+        class="recipeItem"
+        v-for="(r, index) in recipes"
+        v-bind:key="index"
+        @click="openDetails(r)"
+      >
+        {{ r.title }}
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -24,7 +25,6 @@ export default {
   methods: {
     ...mapActions(['setRecipe']),
     openDetails (r) {
-      console.log(r)
       this.setRecipe(r)
     }
   }

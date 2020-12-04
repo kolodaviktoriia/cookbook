@@ -1,26 +1,24 @@
 <template>
   <div id="header-wrapper">
-  <div id="header">
-    <img src="./assets/logo.png" id="logo">
-    Cookbook
+    <div id="header">
+      <img src="./assets/logo.png" id="logo" />
+      Cookbook
+    </div>
   </div>
-  </div>
-  <router-view/>
+  <router-view />
 </template>
 <script>
-export default {
-}
+export default {}
 </script>
 <style>
-
-#logo{
+#logo {
   width: 90px;
   height: 90px;
 }
-#header-wrapper{
+#header-wrapper {
   padding: 50px 150px 0px 150px;
 }
-#header{
+#header {
   padding: 20px;
   border-radius: 5px;
   background: #ffff;
@@ -41,9 +39,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #262626;
-  background: #d9d9d973 ;
+  background: #d9d9d973;
 }
-body{
+body {
   margin: 0;
   padding: 0;
 }

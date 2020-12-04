@@ -1,46 +1,31 @@
 <template>
   <div v-if="isOpen" id="openModal" class="modal">
     <div class="modal-dialog">
-     <div class="modal-content">
+      <div class="modal-content">
         <div class="modal-header">
           <h3 class="modal-title">Add new recipe</h3>
         </div>
         <div class="modal-body">
-         <div class="input-div">
-          <label class="input-label">Title:</label>
-          <input
-            class="input-title"
-            type="text"
-            placeholder="Add title"
-            v-model="title"
-          />
+          <div class="input-div">
+            <label class="input-label">Title:</label>
+            <input class="input-title" type="text" placeholder="Add title" v-model="title" />
+          </div>
+          <div class="input-div">
+            <label class="input-label">Ingredients:</label>
+            <textarea class="input-ingredients" type="text" placeholder="Add ingredients" v-model="ingredients" />
+          </div>
+          <div class="input-div">
+            <label class="input-label">Description:</label>
+            <textarea class="input-description" type="text" placeholder="Add description" v-model="description" />
+          </div>
         </div>
-        <div class="input-div">
-          <label class="input-label">Ingredients:</label>
-          <textarea
-            class="input-ingredients"
-            type="text"
-            placeholder="Add ingredients"
-            v-model="ingredients"
-          />
+        <div class="modal-footer">
+          <div class="modal-btn">
+            <button @click="closeModal" class="btnCancel">Cancel</button>
+            <button @click="addRecipes" class="btnAdd">Add recipe</button>
+          </div>
         </div>
-        <div class="input-div">
-          <label class="input-label">Description:</label>
-          <textarea
-            class="input-description"
-            type="text"
-            placeholder="Add description"
-            v-model="description"
-          />
-        </div>
-       </div>
-          <div class="modal-footer">
-        <div class="modal-btn">
-          <button @click="closeModal" class="btnCancel">Cancel</button>
-          <button @click="addRecipes" class="btnAdd">Add recipe</button>
-        </div>
-        </div>
-    </div>
+      </div>
     </div>
   </div>
   <div class="addRecipes">
@@ -68,9 +53,7 @@ export default {
     ...mapState(['recipes'])
   },
   methods: {
-    ...mapActions([
-      'addRecipe'
-    ]),
+    ...mapActions(['addRecipe']),
     addRecipes () {
       this.addRecipe({
         id: uuid.v1(),
@@ -91,26 +74,26 @@ export default {
 </script>
 
 <style scoped>
-.addRecipes{
+.addRecipes {
   margin: 10px 150px;
 }
-.input-title{
+.input-title {
   padding: 10px;
-  width: 300px
+  width: 300px;
 }
-.input-description ,
-.input-ingredients{
-  padding:10px;
+.input-description,
+.input-ingredients {
+  padding: 10px;
   width: 300px;
   height: 100px;
   resize: none;
 }
-.input-div{
+.input-div {
   margin: 10px;
   display: flex;
   justify-content: space-between;
 }
-.input-label{
+.input-label {
   margin-right: 10px;
 }
 .modal {
@@ -119,62 +102,45 @@ export default {
   right: 0;
   bottom: 0;
   left: 0;
-    background: rgba(0,0,0,0.5);
-    z-index: 1050;
-    margin: 0;
-    padding: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1050;
+  margin: 0;
+  padding: 0;
   pointer-events: auto;
   overflow-y: auto;
 }
 
 .modal-dialog {
-    position: relative;
-    max-width: 500px ;
-    margin: 20vh auto;
+  position: relative;
+  max-width: 500px;
+  margin: 20vh auto;
 }
 
 .modal-content {
-    padding: 10px;
-    position: relative;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    background-color: #fff;
-    -webkit-background-clip: padding-box;
-    background-clip: padding-box;
-    border: 1px solid rgba(0,0,0,.2);
-    border-radius: .3rem;
-    outline: 0;
+  padding: 10px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.3rem;
+  outline: 0;
 }
 
 .modal-header {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: justify;
-    -webkit-justify-content: space-between;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    padding: 15px;
-    border-bottom: 1px solid #eceeef;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  border-bottom: 1px solid #eceeef;
 }
 .modal-title {
-    margin-top: 0;
-    margin-bottom: 0;
-    line-height: 1.5;
-    font-size: 1.25rem;
-    font-weight: 500;
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 1.5;
+  font-size: 1.25rem;
+  font-weight: 500;
 }
 
 .modal-body {
@@ -186,8 +152,8 @@ export default {
   padding: 15px;
   overflow: auto;
 }
-.modal-footer{
-  border-top: 1px solid rgba(0,0,0,.2);
+.modal-footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
   padding: 15px;
 }
 .modal-btn {
@@ -197,7 +163,7 @@ export default {
   margin-left: auto;
   padding-right: 10px;
 }
-.btnCancel ,
+.btnCancel,
 .btnAdd,
 .btnOpen {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -206,7 +172,7 @@ export default {
   cursor: pointer;
   border: none;
 }
-.btnWrap{
+.btnWrap {
   margin-left: auto;
   width: 100px;
 }
@@ -219,7 +185,7 @@ export default {
 }
 .btnCancel:hover,
 .btnAdd:hover,
-.btnOpen:hover{
+.btnOpen:hover {
   background: #dededeb8;
 }
 </style>

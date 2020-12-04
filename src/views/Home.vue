@@ -1,10 +1,10 @@
 <template>
   <div class="home">
-    <AddRecipe/>
+    <AddRecipe />
     <div class="main">
-    <RecipesList />
-    <Recipes v-if="!currentRecipe"/>
-    <Recipe v-if="currentRecipe"/>
+      <RecipesList />
+      <Recipes v-if="!currentRecipe" />
+      <Recipe v-if="currentRecipe" />
     </div>
   </div>
 </template>
@@ -28,7 +28,6 @@ export default {
   computed: {
     ...mapState(['currentRecipe'])
   }
-
 }
 </script>
 <style>
