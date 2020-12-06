@@ -5,6 +5,8 @@ export default createStore({
     recipes: [
       {
         id: '6e30db04-364a-11eb-adc1-0242ac120002',
+        image:
+          'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/recipe-image-legacy-id-1273477_8-ad36e3b.jpg?quality=90&webp=true&resize=300,272',
         title: 'Easy pancakes',
         ingredients: 'flour, eggs, milk, oil, lemon, sugar',
         description:
@@ -28,6 +30,7 @@ export default createStore({
         all.push({
           id: recipes.id,
           title: recipes.title,
+          image: recipes.image,
           ingredients: recipes.ingredients,
           description: recipes.description,
           createdAt: recipes.createdAt
@@ -76,6 +79,7 @@ export default createStore({
           recipes = {
             id: recipe.id,
             title: recipe.title,
+            image: recipe.image,
             description: recipe.description,
             ingredients: recipe.ingredients,
             createdAt: recipe.createdAt

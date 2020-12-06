@@ -14,6 +14,9 @@
       </div>
       <div class="main-recipe">
         <div class="ingredients-recipe">
+          <div class="imgWrap">
+            <img :src="recipe.image" class="recipeImg" />
+          </div>
           <h3 class="title">Ingredients</h3>
           {{ recipe.ingredients }}
         </div>
@@ -30,13 +33,6 @@ import { mapState, mapGetters } from 'vuex'
 
 export default {
   name: 'Recipes',
-  data () {
-    return {
-      title: '',
-      ingredients: '',
-      description: ''
-    }
-  },
   computed: {
     ...mapState(['recipes']),
     ...mapGetters(['allRecipes'])
@@ -45,6 +41,17 @@ export default {
 </script>
 
 <style scoped>
+.imgWrap {
+  width: 90%;
+  height: 200px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+.recipeImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 .recipeDate {
   font-size: 0.5em;
 }

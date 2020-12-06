@@ -12,6 +12,9 @@
       </div>
       <div class="main-recipe">
         <div class="ingredients-recipe">
+          <div class="imgWrap">
+            <img :src="currentRecipe.image" class="recipeImg" />
+          </div>
           <h3 class="title">Ingredients</h3>
           {{ currentRecipe.ingredients }}
         </div>
@@ -35,6 +38,15 @@
               type="text"
               placeholder="Add title"
               v-model="title"
+            />
+          </div>
+          <div class="input-div">
+            <label class="input-label">Image (link):</label>
+            <input
+              class="input-title"
+              type="text"
+              placeholder="Add link"
+              v-model="image"
             />
           </div>
           <div class="input-div">
@@ -77,6 +89,7 @@ export default {
       title: '',
       ingredients: '',
       description: '',
+      image: '',
       isOpen: false
     }
   },
@@ -91,6 +104,7 @@ export default {
         title: this.title,
         ingredients: this.ingredients,
         description: this.description,
+        image: this.image,
         createdAt: this.currentRecipe.createdAt
       })
       this.isOpen = false
@@ -100,6 +114,7 @@ export default {
       this.title = this.currentRecipe.title
       this.ingredients = this.currentRecipe.ingredients
       this.description = this.currentRecipe.description
+      this.image = this.currentRecipe.image
     },
     closeModal () {
       this.isOpen = false
@@ -109,6 +124,17 @@ export default {
 </script>
 
 <style scoped>
+.imgWrap {
+  width: 90%;
+  height: 200px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+.recipeImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 .recipeDate {
   font-size: 0.5em;
 }

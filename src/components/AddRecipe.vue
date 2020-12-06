@@ -16,6 +16,15 @@
             />
           </div>
           <div class="input-div">
+            <label class="input-label">Image (link):</label>
+            <input
+              class="input-title"
+              type="text"
+              placeholder="Add link"
+              v-model="image"
+            />
+          </div>
+          <div class="input-div">
             <label class="input-label">Ingredients:</label>
             <textarea
               class="input-ingredients"
@@ -36,6 +45,7 @@
           <div class="input-div">
             <label class="input-label">Parent recipe:</label>
             <select v-model="parentId" class="input-parent">
+              <option value="" disabled selected hidden>None</option>
               <option
                 v-for="recipe in allRecipes"
                 v-bind:key="recipe.id"
@@ -74,6 +84,7 @@ export default {
       ingredients: '',
       description: '',
       parentId: '',
+      image: '',
       isOpen: false
     }
   },
@@ -88,6 +99,7 @@ export default {
         recipe: {
           id: uuid.v1(),
           title: this.title,
+          image: this.image,
           ingredients: this.ingredients,
           description: this.description,
           createdAt: new Date().toLocaleString(),
