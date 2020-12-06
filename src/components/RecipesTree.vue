@@ -38,7 +38,7 @@ export default {
   cursor: pointer;
   text-align: initial;
 }
-ul{
+ul {
   list-style-type: disc;
 }
 </style>

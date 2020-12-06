@@ -84,7 +84,6 @@ export default {
   methods: {
     ...mapActions(['addRecipe']),
     addRecipes () {
-      console.log(this.parentId)
       this.addRecipe({
         recipe: {
           id: uuid.v1(),

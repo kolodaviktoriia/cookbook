@@ -5,12 +5,11 @@
       v-bind:key="index"
       class="recipe-wrapper"
     >
-          <div class="title-recipe">
+      <div class="title-recipe">
         <div class="recipeDate">{{ recipe.createdAt }}</div>
         {{ recipe.title }}
         <div class="addRecipes">
-          <div class="Wrap">
-          </div>
+          <div class="Wrap"></div>
         </div>
       </div>
       <div class="main-recipe">
@@ -54,7 +53,7 @@ export default {
   width: 70%;
   overflow: auto;
 }
-.Wrap{
+.Wrap {
   width: 100px;
 }
 .recipe-wrapper {
@@ -64,7 +63,7 @@ export default {
   margin-bottom: 25px;
 }
 .title-recipe {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 1.5em;

@@ -43,7 +43,7 @@ ul {
   border-radius: 5px;
   margin-right: 10%;
 }
-.all-header{
-  cursor: pointer
+.all-header {
+  cursor: pointer;
 }
 </style>
