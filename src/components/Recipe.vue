@@ -151,6 +151,8 @@ export default {
   width: 50%;
   min-height: 100%;
   border-left: 2px solid #7a75756e;
+  text-align: justify;
+  padding: 10px;
 }
 .editRecipes {
   margin: 10px 150px;
