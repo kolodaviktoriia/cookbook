@@ -1,48 +1,49 @@
 <template>
   <div class="recipesList">
-    <h3>All recipes</h3>
+    <h3 @click="openAll" class="all-header">All recipes</h3>
     <ul>
-      <li
-        class="recipeItem"
-        v-for="(r, index) in recipes"
+      <RecipesTree
+        v-for="(recipe, index) in recipes"
         v-bind:key="index"
-        @click="openDetails(r)"
-      >
-        {{ r.title }}
-      </li>
+        :item="recipe"
+      />
     </ul>
   </div>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex'
-
+import RecipesTree from '@/components/RecipesTree.vue'
 export default {
   name: 'RecipesList',
+  components: {
+    RecipesTree
+  },
   computed: {
     ...mapState(['recipes'])
   },
   methods: {
-    ...mapActions(['setRecipe']),
-    openDetails (r) {
-      this.setRecipe(r)
+    ...mapActions(['unSetRecipe']),
+    openAll () {
+      this.unSetRecipe()
     }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+ul {
+  list-style-type: disc;
+}
 .recipesList {
-  max-height: 50vh;
+  max-height: 60vh;
   width: 20%;
-  background: #fff;
   overflow: auto;
+  background: #fff;
   border-radius: 5px;
   margin-right: 10%;
-  margin-bottom: ;
 }
-.recipeItem {
-  cursor: pointer;
+.all-header{
+  cursor: pointer
 }
 </style>

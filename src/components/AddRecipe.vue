@@ -33,6 +33,18 @@
               v-model="description"
             />
           </div>
+          <div class="input-div">
+            <label class="input-label">Parent recipe:</label>
+            <select v-model="parentId" class="input-parent">
+              <option
+                v-for="recipe in allRecipes"
+                v-bind:key="recipe.id"
+                v-bind:value="recipe.id"
+              >
+                {{ recipe.title }}
+              </option>
+            </select>
+          </div>
         </div>
         <div class="modal-footer">
           <div class="modal-btn">
@@ -51,7 +63,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapGetters } from 'vuex'
 import { uuid } from 'vue-uuid'
 
 export default {
@@ -61,22 +73,34 @@ export default {
       title: '',
       ingredients: '',
       description: '',
+      parentId: '',
       isOpen: false
     }
   },
   computed: {
-    ...mapState(['recipes'])
+    ...mapState(['recipes']),
+    ...mapGetters(['allRecipes'])
   },
   methods: {
     ...mapActions(['addRecipe']),
     addRecipes () {
+      console.log(this.parentId)
       this.addRecipe({
-        id: uuid.v1(),
-        title: this.title,
-        ingredients: this.ingredients,
-        description: this.description
+        recipe: {
+          id: uuid.v1(),
+          title: this.title,
+          ingredients: this.ingredients,
+          description: this.description,
+          createdAt: new Date().toLocaleString(),
+          children: []
+        },
+        parentId: this.parentId
       })
       this.isOpen = false
+      this.title = ''
+      this.ingredients = ''
+      this.description = ''
+      this.parentId = ''
     },
     showModal () {
       this.isOpen = true
@@ -95,6 +119,10 @@ export default {
 .input-title {
   padding: 10px;
   width: 300px;
+}
+.input-parent {
+  padding: 10px;
+  width: 340px;
 }
 .input-description,
 .input-ingredients {

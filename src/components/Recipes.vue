@@ -1,12 +1,17 @@
 <template>
   <div class="recipes">
     <div
-      v-for="(recipe, index) in recipes"
+      v-for="(recipe, index) in allRecipes"
       v-bind:key="index"
       class="recipe-wrapper"
     >
-      <div class="title-recipe">
+          <div class="title-recipe">
+        <div class="recipeDate">{{ recipe.createdAt }}</div>
         {{ recipe.title }}
+        <div class="addRecipes">
+          <div class="Wrap">
+          </div>
+        </div>
       </div>
       <div class="main-recipe">
         <div class="ingredients-recipe">
@@ -22,7 +27,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   name: 'Recipes',
@@ -34,17 +39,23 @@ export default {
     }
   },
   computed: {
-    ...mapState(['recipes'])
+    ...mapState(['recipes']),
+    ...mapGetters(['allRecipes'])
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.recipeDate {
+  font-size: 0.5em;
+}
 .recipes {
-  max-height: 50vh;
+  max-height: 60vh;
   width: 70%;
   overflow: auto;
+}
+.Wrap{
+  width: 100px;
 }
 .recipe-wrapper {
   background: #ffff;
@@ -53,7 +64,7 @@ export default {
   margin-bottom: 25px;
 }
 .title-recipe {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 1.5em;
@@ -62,9 +73,10 @@ export default {
   padding: 10px;
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
 }
 .main-recipe {
-  min-height: 200px;
+  min-height: 100px;
   display: flex;
   flex-flow: row;
   padding: 2%;

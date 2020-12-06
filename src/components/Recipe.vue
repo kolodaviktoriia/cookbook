@@ -2,6 +2,7 @@
   <div class="recipe">
     <div class="recipe-wrapper">
       <div class="title-recipe">
+        <div class="recipeDate">{{ currentRecipe.createdAt }}</div>
         {{ currentRecipe.title }}
         <div class="addRecipes">
           <div class="btnWrap">
@@ -89,7 +90,8 @@ export default {
         id: this.currentRecipe.id,
         title: this.title,
         ingredients: this.ingredients,
-        description: this.description
+        description: this.description,
+        createdAt: this.currentRecipe.createdAt
       })
       this.isOpen = false
     },
@@ -107,8 +109,11 @@ export default {
 </script>
 
 <style scoped>
+.recipeDate {
+  font-size: 0.5em;
+}
 .recipe {
-  max-height: 50vh;
+  max-height: 60vh;
   width: 70%;
   overflow: auto;
 }
@@ -128,9 +133,10 @@ export default {
   padding: 10px;
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
 }
 .main-recipe {
-  min-height: 200px;
+  min-height: 100px;
   display: flex;
   flex-flow: row;
   padding: 2%;
