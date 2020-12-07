@@ -14,23 +14,23 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions } from "vuex";
 
 export default {
-  name: 'RecipesTree',
+  name: "RecipesTree",
   props: {
     item: Object
   },
   computed: {
-    ...mapState(['recipes'])
+    ...mapState(["recipes"])
   },
   methods: {
-    ...mapActions(['setRecipe']),
-    openDetails (r) {
-      this.setRecipe(r)
+    ...mapActions(["setRecipe"]),
+    openDetails(r) {
+      this.setRecipe(r);
     }
   }
-}
+};
 </script>
 
 <style scoped>

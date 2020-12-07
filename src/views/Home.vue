@@ -3,22 +3,24 @@
     <AddRecipe />
     <div class="main">
       <RecipesList />
-      <Recipes v-if="!currentRecipe" />
-      <Recipe v-if="currentRecipe" />
+      <div class="recipesBlock">
+        <Recipes v-if="!currentRecipe" />
+        <Recipe v-else :recipe="currentRecipe" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import AddRecipe from '@/components/AddRecipe.vue'
-import Recipes from '@/components/Recipes.vue'
-import Recipe from '@/components/Recipe.vue'
-import RecipesList from '@/components/RecipesList.vue'
-import { mapState } from 'vuex'
+import AddRecipe from "@/components/AddRecipe.vue";
+import Recipes from "@/components/Recipes.vue";
+import Recipe from "@/components/Recipe.vue";
+import RecipesList from "@/components/RecipesList.vue";
+import { mapState } from "vuex";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
     AddRecipe,
     Recipes,
@@ -26,13 +28,19 @@ export default {
     RecipesList
   },
   computed: {
-    ...mapState(['currentRecipe'])
+    ...mapState(["currentRecipe"])
   }
-}
+};
 </script>
 <style>
 .main {
   display: flex;
-  margin: 0 150px;
+}
+.recipesBlock {
+  display: flex;
+  overflow: auto;
+  width: 70%;
+  max-height: 70vh;
+  flex-direction: column;
 }
 </style>

@@ -1,23 +1,24 @@
 <template>
-  <div id="header-wrapper">
+  <div id="wrapper">
     <div id="header">
       <img src="./assets/logo.png" id="logo" />
       Cookbook
     </div>
+    <router-view />
   </div>
-  <router-view />
 </template>
 <script>
-export default {}
+export default {};
 </script>
 <style>
 #logo {
   width: 90px;
   height: 90px;
 }
-#header-wrapper {
+#wrapper {
   padding: 50px 150px 0px 150px;
 }
+
 #header {
   padding: 20px;
   border-radius: 5px;
@@ -31,6 +32,25 @@ export default {}
   font-weight: bold;
   color: #262626;
 }
+@media (max-width: 1120px) {
+  #wrapper {
+    padding: 10px 50px 0px 50px;
+  }
+}
+
+@media (max-width: 680px) {
+  #wrapper {
+    padding: 10px 10px 0px 10px;
+  }
+  #header {
+    font-size: 3em;
+  }
+  #logo {
+    width: 60px;
+    height: 60px;
+  }
+}
+
 #app {
   width: 100vw;
   height: 100vh;

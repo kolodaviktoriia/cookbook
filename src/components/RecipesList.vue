@@ -12,23 +12,23 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
-import RecipesTree from '@/components/RecipesTree.vue'
+import { mapState, mapActions } from "vuex";
+import RecipesTree from "@/components/RecipesTree.vue";
 export default {
-  name: 'RecipesList',
+  name: "RecipesList",
   components: {
     RecipesTree
   },
   computed: {
-    ...mapState(['recipes'])
+    ...mapState(["recipes"])
   },
   methods: {
-    ...mapActions(['unSetRecipe']),
-    openAll () {
-      this.unSetRecipe()
+    ...mapActions(["unSetRecipe"]),
+    openAll() {
+      this.unSetRecipe();
     }
   }
-}
+};
 </script>
 
 <style scoped>
@@ -36,7 +36,7 @@ ul {
   list-style-type: disc;
 }
 .recipesList {
-  max-height: 60vh;
+  max-height: 70vh;
   width: 20%;
   overflow: auto;
   background: #fff;
@@ -45,5 +45,11 @@ ul {
 }
 .all-header {
   cursor: pointer;
+}
+@media (max-width: 900px) {
+  .recipesList {
+    width: 30%;
+    margin-right: 5%;
+  }
 }
 </style>
