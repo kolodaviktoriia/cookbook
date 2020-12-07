@@ -13,7 +13,7 @@
       <div class="main-recipe">
         <div class="ingredients-recipe">
           <div class="imgWrap">
-            <img :src="recipe.image" class="recipeImg" />
+            <img :src="image" class="recipeImg" />
           </div>
           <h3 class="title">Ingredients</h3>
           {{ recipe.ingredients }}
@@ -29,21 +29,36 @@
 
 <script>
 import ModalRecipe from "@/components/ModalRecipe.vue";
+import defaultImage from "@/assets/default.png";
 
 export default {
   name: "Recipe",
   components: {
     ModalRecipe
   },
+  data() {
+    return {
+      isOpen: false,
+      image: defaultImage
+    };
+  },
+  mounted() {
+    if (this.imageExists(this.recipe.image)) {
+      this.image = this.recipe.image;
+    }
+  },
   props: {
     recipe: Object
   },
-  data() {
-    return {
-      isOpen: false
-    };
-  },
   methods: {
+    imageExists(url) {
+      var http = new XMLHttpRequest();
+
+      http.open("HEAD", url, false);
+      http.send();
+
+      return http.status !== 404;
+    },
     showModal() {
       this.isOpen = true;
     },
@@ -59,12 +74,12 @@ export default {
   width: 90%;
   height: 200px;
   overflow: hidden;
-  margin: 0 auto;
+  margin: 10px auto;
 }
 .recipeImg {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 .recipeDate {
   font-size: 0.5em;
