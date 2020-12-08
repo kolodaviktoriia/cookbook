@@ -1,22 +1,27 @@
 <template>
-  <Recipe
-    v-for="(recipe, index) in allRecipes"
-    v-bind:key="index"
-    :recipe="recipe"
-  />
+  <div id="Recipes">
+    <Recipe
+      v-for="(recipe, index) in recipes"
+      :key="index"
+      :title="recipe.title"
+      :description="recipe.description"
+      :ingredients="recipe.ingredients"
+      :createdAt="recipe.createdAt"
+      :image="recipe.image"
+    />
+  </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 import Recipe from "@/components/Recipe.vue";
 
 export default {
   name: "Recipes",
+  props: {
+    recipes: Object
+  },
   components: {
     Recipe
-  },
-  computed: {
-    ...mapGetters(["allRecipes"])
   }
 };
 </script>

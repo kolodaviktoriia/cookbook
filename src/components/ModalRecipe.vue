@@ -8,21 +8,11 @@
         <div class="modal-body">
           <div class="input-div">
             <label class="input-label">Title:</label>
-            <input
-              class="input-title"
-              type="text"
-              placeholder="Add title"
-              v-model="title"
-            />
+            <input class="input-title" type="text" placeholder="Add title" v-model="title" />
           </div>
           <div class="input-div">
             <label class="input-label">Image (link):</label>
-            <input
-              class="input-title"
-              type="text"
-              placeholder="Add link"
-              v-model="image"
-            />
+            <input class="input-title" type="text" placeholder="Add link" v-model="image" />
           </div>
           <div class="input-div">
             <label class="input-label">Ingredients:</label>
@@ -45,12 +35,8 @@
           <div v-if="!recipe" class="input-div">
             <label class="input-label">Parent recipe:</label>
             <select v-model="parentId" class="input-parent">
-              <option value="" disabled selected hidden>None</option>
-              <option
-                v-for="recipe in allRecipes"
-                v-bind:key="recipe.id"
-                v-bind:value="recipe.id"
-              >
+              <option :value="null" disabled selected hidden>None</option>
+              <option v-for="recipe in recipes" :key="recipe.id" :value="recipe.id">
                 {{ recipe.title }}
               </option>
             </select>
@@ -74,7 +60,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapState } from "vuex";
 import { uuid } from "vue-uuid";
 
 export default {
@@ -89,7 +75,7 @@ export default {
       title: "",
       ingredients: "",
       description: "",
-      parentId: "",
+      parentId: null,
       image: "",
       titleModal: "Add new recipe",
       label: "Add recipe"
@@ -106,7 +92,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["allRecipes"])
+    ...mapState(["recipes"])
   },
   methods: {
     ...mapActions(["addRecipe", "editRecipe"]),
@@ -129,15 +115,12 @@ export default {
     },
     addRecipes() {
       this.addRecipe({
-        recipe: {
-          id: uuid.v1(),
-          title: this.title,
-          image: this.image,
-          ingredients: this.ingredients,
-          description: this.description,
-          createdAt: new Date().toLocaleString(),
-          children: []
-        },
+        id: uuid.v1(),
+        title: this.title,
+        image: this.image,
+        ingredients: this.ingredients,
+        description: this.description,
+        createdAt: new Date().toLocaleString(),
         parentId: this.parentId
       });
       this.onClose();

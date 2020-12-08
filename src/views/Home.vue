@@ -2,9 +2,9 @@
   <div class="home">
     <AddRecipe />
     <div class="main">
-      <RecipesList />
+      <RecipesList :recipes="recipesTree" />
       <div class="recipesBlock">
-        <Recipes v-if="!currentRecipe" />
+        <Recipes v-if="!currentRecipe" :recipes="recipes" />
         <Recipe v-else :recipe="currentRecipe" />
       </div>
     </div>
@@ -17,7 +17,7 @@ import AddRecipe from "@/components/AddRecipe.vue";
 import Recipes from "@/components/Recipes.vue";
 import Recipe from "@/components/Recipe.vue";
 import RecipesList from "@/components/RecipesList.vue";
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 
 export default {
   name: "Home",
@@ -28,7 +28,8 @@ export default {
     RecipesList
   },
   computed: {
-    ...mapState(["currentRecipe"])
+    ...mapState(["currentRecipe", "recipes"]),
+    ...mapGetters(["recipesTree"])
   }
 };
 </script>

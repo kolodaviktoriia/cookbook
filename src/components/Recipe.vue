@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     imageExists(url) {
-      var http = new XMLHttpRequest();
+      const http = new XMLHttpRequest();
 
       http.open("HEAD", url, false);
       http.send();

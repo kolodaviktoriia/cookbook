@@ -1,34 +1,30 @@
 <template>
   <li>
-    <div @click="openDetails(item)" class="recipeItem ">
-      {{ item.title }}
+    <div @click="setRecipe(item)" class="recipeItem ">
+      {{ title }}
     </div>
-    <ul v-if="item.children">
+    <ul v-if="children">
       <RecipesTree
-        v-for="(child, index) in item.children"
+        v-for="(child, index) in children"
         :key="index"
-        :item="child"
+        :title="child.title"
+        :children="child.children"
       />
     </ul>
   </li>
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   name: "RecipesTree",
   props: {
-    item: Object
-  },
-  computed: {
-    ...mapState(["recipes"])
+    title: String,
+    children: Array
   },
   methods: {
-    ...mapActions(["setRecipe"]),
-    openDetails(r) {
-      this.setRecipe(r);
-    }
+    ...mapActions(["setRecipe"])
   }
 };
 </script>

@@ -18,87 +18,47 @@ export default createStore({
           "5. Serve with lemon wedges and caster sugar, or your favourite filling. Once cold, you can layer the pancakes " +
           "between baking parchment, then wrap in cling film and freeze for up to 2 months.",
         createdAt: new Date().toLocaleString(),
-        children: []
+        parentId: null
       }
     ],
     currentRecipe: null
   },
   getters: {
-    allRecipes: state => {
-      const addRecipe = recipes => {
-        let all = [];
-        all.push({
-          id: recipes.id,
-          title: recipes.title,
-          image: recipes.image,
-          ingredients: recipes.ingredients,
-          description: recipes.description,
-          createdAt: recipes.createdAt
+    recipesTree: state => {
+      function buildTree(items, parentId = null) {
+        let result = [];
+        items.forEach(item => {
+          if (item.parentId === parentId) {
+            result.push(item);
+            item.children = buildTree(items, item.id);
+          }
         });
-        if (recipes.children) {
-          recipes.children.forEach(child => {
-            all = all.concat(addRecipe(child));
-          });
-          return all;
-        }
-      };
-      let allRecipes = [];
-      state.recipes.forEach(v => {
-        allRecipes = allRecipes.concat(addRecipe(v));
-      });
-
-      return allRecipes;
+        return result;
+      }
+      const roots = state.recipes.filter(r => r.parentId === null);
+      const result = roots.map(r => ({
+        id: r.id,
+        image: r.image,
+        title: r.title,
+        ingredients: r.ingredients,
+        description: r.description,
+        createdAt: r.createdAt,
+        parentId: null,
+        children: buildTree(state.recipes, r.id)
+      }));
+      return result;
     }
   },
   mutations: {
     ADD_RECIPE: (state, payload) => {
-      if (!payload.parentId) {
-        state.recipes.push(payload.recipe);
-      } else {
-        const updateRecipe = (id, recipe, recipes) => {
-          if (recipes.id === id) {
-            recipes.children.push(recipe);
-          } else {
-            recipes.children = recipes.children.map(child =>
-              updateRecipe(id, recipe, child)
-            );
-          }
-          recipes.children = recipes.children.sort((a, b) =>
-            a.title > b.title ? 1 : -1
-          );
-          return recipes;
-        };
-        state.recipes.forEach((v, i) => {
-          state.recipes[i] = updateRecipe(payload.parentId, payload.recipe, v);
-        });
-      }
+      state.recipes.push(payload);
     },
-    EDIT_RECIPE: (state, recipe) => {
-      const updateRecipe = (id, recipe, recipes) => {
-        if (recipes.id === id) {
-          recipes = {
-            ...recipes,
-            title: recipe.title,
-            image: recipe.image,
-            description: recipe.description,
-            ingredients: recipe.ingredients
-          };
-        } else {
-          recipes.children = recipes.children.map(child =>
-            updateRecipe(id, recipe, child)
-          );
-        }
-        return recipes;
-      };
-      state.recipes.forEach((v, i) => {
-        state.recipes[i] = updateRecipe(recipe.id, recipe, v);
-      });
-      if (state.currentRecipe) {
-        state.currentRecipe = recipe;
-      }
+    EDIT_RECIPE: (state, payload) => {
+      const updateIndex = state.recipes.findIndex(recipe => recipe.id === payload);
+      state.recipes[updateIndex] = payload;
     },
-    SET_CURRENT_RECIPE: (state, recipe) => {
-      state.currentRecipe = recipe;
+    SET_CURRENT_RECIPE: (state, payload) => {
+      state.currentRecipe = payload;
     }
   },
   actions: {
