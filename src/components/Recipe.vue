@@ -23,8 +23,8 @@
         </div>
       </div>
     </div>
+    <ModalRecipe v-if="isOpen" :close="closeModal" :recipe="recipe" />
   </div>
-  <ModalRecipe v-if="isOpen" :close="closeModal" :recipe="recipe" />
 </template>
 
 <script>

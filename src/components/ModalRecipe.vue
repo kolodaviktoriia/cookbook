@@ -66,7 +66,6 @@ import { uuid } from "vue-uuid";
 export default {
   name: "ModalRecipe",
   props: {
-    isOpen: Boolean,
     recipe: Object,
     close: Function
   },
@@ -100,7 +99,7 @@ export default {
       this.title = "";
       this.ingredients = "";
       this.description = "";
-      this.parentId = "";
+      this.parentId = null;
       this.close();
     },
     editRecipes() {
