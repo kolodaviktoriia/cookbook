@@ -66,7 +66,12 @@ import { uuid } from "vue-uuid";
 export default {
   name: "ModalRecipe",
   props: {
-    recipe: Object,
+    idProp: String,
+    titleProp: String,
+    descriptionProp: String,
+    ingredientsProp: String,
+    createdAtProp: String,
+    imageProp: String,
     close: Function
   },
   data() {
@@ -81,13 +86,13 @@ export default {
     };
   },
   mounted() {
-    if (this.recipe) {
+    if (this.idProp) {
       this.label = "Edit recipe";
       this.titleModal = "Edit recipe";
-      this.title = this.recipe?.title;
-      this.ingredients = this.recipe?.ingredients;
-      this.description = this.recipe?.description;
-      this.image = this.recipe?.image;
+      this.title = this.titleProp;
+      this.ingredients = this.ingredientsProp;
+      this.description = this.descriptionProp;
+      this.image = this.imageProp;
     }
   },
   computed: {

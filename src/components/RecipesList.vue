@@ -3,9 +3,12 @@
     <h3 @click="unSetRecipe" class="all-header">All recipes</h3>
     <ul>
       <RecipesTree
-      v-for="(recipe, index) in recipes"
-      :key="index"
-      :item="recipe" />
+        v-for="(recipe, index) in recipes"
+        :key="index"
+        :title="recipe.title"
+        :children="recipe.children"
+        :item="recipe"
+      />
     </ul>
   </div>
 </template>

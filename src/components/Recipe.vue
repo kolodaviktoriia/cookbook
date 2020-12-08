@@ -2,8 +2,8 @@
   <div class="recipe">
     <div class="recipe-wrapper">
       <div class="title-recipe">
-        <div class="recipeDate">{{ recipe.createdAt }}</div>
-        {{ recipe.title }}
+        <div class="recipeDate">{{ createdAt }}</div>
+        {{ title }}
         <div class="addRecipes">
           <div class="btnWrap">
             <button @click="showModal" class="btnOpen">Edit</button>
@@ -13,17 +13,26 @@
       <div class="main-recipe">
         <div class="ingredients-recipe">
           <div class="imgWrap">
-            <img :src="image" class="recipeImg" />
+            <img :src="imageRecipe" class="recipeImg" />
           </div>
           <h3 class="title">Ingredients</h3>
-          {{ recipe.ingredients }}
+          {{ ingredients }}
         </div>
         <div class="description-recipe">
-          {{ recipe.description }}
+          {{ description }}
         </div>
       </div>
     </div>
-    <ModalRecipe v-if="isOpen" :close="closeModal" :recipe="recipe" />
+    <ModalRecipe
+      v-if="isOpen"
+      :close="closeModal"
+      :idProp="id"
+      :titleProp="title"
+      :descriptionProp="description"
+      :ingredientsProp="ingredients"
+      :createdAtProp="createdAt"
+      :imageProp="image"
+    />
   </div>
 </template>
 
@@ -39,16 +48,21 @@ export default {
   data() {
     return {
       isOpen: false,
-      image: defaultImage
+      imageRecipe: defaultImage
     };
   },
   mounted() {
-    if (this.imageExists(this.recipe.image)) {
-      this.image = this.recipe.image;
+    if (this.imageExists(this.image)) {
+      this.imageRecipe = this.image;
     }
   },
   props: {
-    recipe: Object
+    id: String,
+    title: String,
+    description: String,
+    ingredients: String,
+    createdAt: String,
+    image: String
   },
   methods: {
     imageExists(url) {

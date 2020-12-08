@@ -5,7 +5,14 @@
       <RecipesList :recipes="recipesTree" />
       <div class="recipesBlock">
         <Recipes v-if="!currentRecipe" :recipes="recipes" />
-        <Recipe v-else :recipe="currentRecipe" />
+        <Recipe
+          v-else
+          :title="currentRecipe.title"
+          :description="currentRecipe.description"
+          :ingredients="currentRecipe.ingredients"
+          :createdAt="currentRecipe.createdAt"
+          :image="currentRecipe.image"
+        />
       </div>
     </div>
   </div>
