@@ -47,6 +47,11 @@ export default createStore({
         children: buildTree(state.recipes, r.id)
       }));
       return result;
+    },
+    recipeById: state => id => {
+      console.log(id);
+      console.log("recipebyid");
+      return state.recipes.find(recipe => recipe.id === id);
     }
   },
   mutations: {

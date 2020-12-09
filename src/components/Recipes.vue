@@ -14,15 +14,16 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import Recipe from "@/components/Recipe.vue";
 
 export default {
   name: "Recipes",
-  props: {
-    recipes: Object
-  },
   components: {
     Recipe
+  },
+  computed: {
+    ...mapState(["recipes"])
   }
 };
 </script>

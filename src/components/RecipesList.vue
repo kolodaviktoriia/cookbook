@@ -1,20 +1,19 @@
 <template>
   <div class="recipesList">
-    <h3 @click="unSetRecipe" class="all-header">All recipes</h3>
+    <h3 @click="showAllRecipes" class="all-header">All recipes</h3>
     <ul>
       <RecipesTree
         v-for="(recipe, index) in recipes"
         :key="index"
+        :index="recipe.id"
         :title="recipe.title"
         :children="recipe.children"
-        :item="recipe"
       />
     </ul>
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
 import RecipesTree from "@/components/RecipesTree.vue";
 
 export default {
@@ -26,7 +25,9 @@ export default {
     RecipesTree
   },
   methods: {
-    ...mapActions(["unSetRecipe"])
+    showAllRecipes() {
+      this.$router.push("/");
+    }
   }
 };
 </script>

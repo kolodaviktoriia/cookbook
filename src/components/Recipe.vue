@@ -2,8 +2,8 @@
   <div class="recipe">
     <div class="recipe-wrapper">
       <div class="title-recipe">
-        <div class="recipeDate">{{ createdAt }}</div>
-        {{ title }}
+        <div class="recipeDate">{{ recipe().createdAt }}</div>
+        {{ recipe().title }}
         <div class="addRecipes">
           <div class="btnWrap">
             <button @click="showModal" class="btnOpen">Edit</button>
@@ -13,25 +13,25 @@
       <div class="main-recipe">
         <div class="ingredients-recipe">
           <div class="imgWrap">
-            <img :src="imageRecipe" class="recipeImg" />
+            <img :src="recipe().image" class="recipeImg" />
           </div>
           <h3 class="title">Ingredients</h3>
-          {{ ingredients }}
+          {{ recipe().ingredients }}
         </div>
         <div class="description-recipe">
-          {{ description }}
+          {{ recipe().description }}
         </div>
       </div>
     </div>
     <ModalRecipe
       v-if="isOpen"
       :close="closeModal"
-      :idProp="id"
-      :titleProp="title"
-      :descriptionProp="description"
-      :ingredientsProp="ingredients"
-      :createdAtProp="createdAt"
-      :imageProp="image"
+      :idProp="recipe().id"
+      :titleProp="recipe().title"
+      :descriptionProp="recipe().description"
+      :ingredientsProp="recipe().ingredients"
+      :createdAtProp="recipe().createdAt"
+      :imageProp="recipe().image"
     />
   </div>
 </template>
@@ -39,6 +39,7 @@
 <script>
 import ModalRecipe from "@/components/ModalRecipe.vue";
 import defaultImage from "@/assets/default.png";
+import { mapGetters } from "vuex";
 
 export default {
   name: "Recipe",
@@ -51,11 +52,6 @@ export default {
       imageRecipe: defaultImage
     };
   },
-  mounted() {
-    if (this.imageExists(this.image)) {
-      this.imageRecipe = this.image;
-    }
-  },
   props: {
     id: String,
     title: String,
@@ -64,7 +60,27 @@ export default {
     createdAt: String,
     image: String
   },
+  computed: {
+    ...mapGetters(["recipeById"])
+  },
   methods: {
+    recipe() {
+      if (this.$route.params.id) {
+        console.log(this.$route.params.id);
+        const recipe = this.recipeById(this.$route.params.id);
+        recipe.image = this.imageExists(recipe.image) ? recipe.image : defaultImage;
+        return recipe;
+      }
+      const image = this.imageExists(this.image) ? this.image : defaultImage;
+      return {
+        id: this.id,
+        title: this.title,
+        description: this.description,
+        ingredients: this.ingredients,
+        createdAt: this.createdAt,
+        image
+      };
+    },
     imageExists(url) {
       const http = new XMLHttpRequest();
 

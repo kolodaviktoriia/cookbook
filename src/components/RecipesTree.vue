@@ -1,12 +1,13 @@
 <template>
   <li>
-    <div @click="setRecipe(item)" class="recipeItem ">
+    <div @click="showRecipeDetailes(index)" class="recipeItem ">
       {{ title }}
     </div>
     <ul v-if="children">
       <RecipesTree
         v-for="(child, index) in children"
         :key="index"
+        :index="child.id"
         :title="child.title"
         :children="child.children"
       />
@@ -15,16 +16,17 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-
 export default {
   name: "RecipesTree",
   props: {
+    index: String,
     title: String,
     children: Array
   },
   methods: {
-    ...mapActions(["setRecipe"])
+    showRecipeDetailes(index) {
+      this.$router.push(`/recipe/${index}`);
+    }
   }
 };
 </script>
