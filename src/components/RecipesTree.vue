@@ -1,6 +1,6 @@
 <template>
   <li>
-    <div @click="showRecipeDetailes(index)" class="recipeItem ">
+    <div @click="showRecipeDetailes(index)" class="recipeItem">
       {{ title }}
     </div>
     <ul v-if="children">

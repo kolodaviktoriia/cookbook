@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 import AddRecipe from "@/components/AddRecipe.vue";
 import RecipesList from "@/components/RecipesList.vue";
 
