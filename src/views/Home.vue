@@ -11,10 +11,9 @@
 </template>
 
 <script>
-// @ is an alias to /src
+import { mapState, mapGetters } from "vuex";
 import AddRecipe from "@/components/AddRecipe.vue";
 import RecipesList from "@/components/RecipesList.vue";
-import { mapState, mapGetters } from "vuex";
 
 export default {
   name: "Home",
@@ -23,7 +22,6 @@ export default {
     RecipesList
   },
   computed: {
-    ...mapState(["recipes"]),
     ...mapGetters(["recipesTree"])
   }
 };

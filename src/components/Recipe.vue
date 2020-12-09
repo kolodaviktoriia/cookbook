@@ -28,9 +28,9 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import ModalRecipe from "@/components/ModalRecipe.vue";
 import defaultImage from "@/assets/default.png";
-import { mapGetters } from "vuex";
 
 export default {
   name: "Recipe",
