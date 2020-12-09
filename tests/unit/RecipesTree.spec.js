@@ -2,15 +2,26 @@ import { shallowMount } from "@vue/test-utils";
 import RecipesTree from "@/components/RecipesTree.vue";
 
 describe("RecipesTree.vue", () => {
-  it("renders props.title when passed", () => {
-    //    const msg = "new message";
-    //    const wrapper = shallowMount(HelloWorld, {
-    //      props: { msg }
-    //   });
-    const wrapper = shallowMount(RecipesTree, 
+  const test = {
+    id: "test1",
+    title: "testTitle1",
+    children: [
       {
-          props: { title:"Test"}
-           });
-    expect(wrapper.text()).toMatch("Test");
+        id: "test2",
+        title: "testTitle2",
+        children: null
+      },
+      {
+        id: "test3",
+        title: "testTitle3",
+        children: null
+      }
+    ]
+  };
+  it("renders props.title when passed", () => {
+    const wrapper = shallowMount(RecipesTree, {
+      props: test
+    });
+    expect(wrapper.text()).toMatch("testTitle1");
   });
 });
