@@ -20,8 +20,7 @@ export default createStore({
         createdAt: new Date().toLocaleString(),
         parentId: null
       }
-    ],
-    currentRecipe: null
+    ]
   },
   getters: {
     recipesTree: state => {
@@ -49,8 +48,6 @@ export default createStore({
       return result;
     },
     recipeById: state => id => {
-      console.log(id);
-      console.log("recipebyid");
       return state.recipes.find(recipe => recipe.id === id);
     }
   },
@@ -59,11 +56,8 @@ export default createStore({
       state.recipes.push(payload);
     },
     EDIT_RECIPE: (state, payload) => {
-      const updateIndex = state.recipes.findIndex(recipe => recipe.id === payload);
+      const updateIndex = state.recipes.findIndex(recipe => recipe.id === payload.id);
       state.recipes[updateIndex] = payload;
-    },
-    SET_CURRENT_RECIPE: (state, payload) => {
-      state.currentRecipe = payload;
     }
   },
   actions: {
@@ -72,12 +66,6 @@ export default createStore({
     },
     editRecipe: (context, payload) => {
       context.commit("EDIT_RECIPE", payload);
-    },
-    setRecipe: (context, recipe) => {
-      context.commit("SET_CURRENT_RECIPE", recipe);
-    },
-    unSetRecipe: context => {
-      context.commit("SET_CURRENT_RECIPE", null);
     }
   },
   modules: {}

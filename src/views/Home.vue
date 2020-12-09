@@ -23,7 +23,7 @@ export default {
     RecipesList
   },
   computed: {
-    ...mapState(["currentRecipe", "recipes"]),
+    ...mapState(["recipes"]),
     ...mapGetters(["recipesTree"])
   }
 };

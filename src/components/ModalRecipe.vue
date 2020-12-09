@@ -32,7 +32,7 @@
               v-model="description"
             />
           </div>
-          <div v-if="!recipe" class="input-div">
+          <div v-if="!id" class="input-div">
             <label class="input-label">Parent recipe:</label>
             <select v-model="parentId" class="input-parent">
               <option :value="null" disabled selected hidden>None</option>
@@ -60,18 +60,13 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapState, mapGetters } from "vuex";
 import { uuid } from "vue-uuid";
 
 export default {
   name: "ModalRecipe",
   props: {
-    idProp: String,
-    titleProp: String,
-    descriptionProp: String,
-    ingredientsProp: String,
-    createdAtProp: String,
-    imageProp: String,
+    id: String,
     close: Function
   },
   data() {
@@ -86,17 +81,20 @@ export default {
     };
   },
   mounted() {
-    if (this.idProp) {
+    if (this.id) {
+      const recipe = this.recipeById(this.id);
       this.label = "Edit recipe";
       this.titleModal = "Edit recipe";
-      this.title = this.titleProp;
-      this.ingredients = this.ingredientsProp;
-      this.description = this.descriptionProp;
-      this.image = this.imageProp;
+      this.title = recipe.title;
+      this.ingredients = recipe.ingredients;
+      this.description = recipe.description;
+      this.image = recipe.image;
+      this.parentId = recipe.parentId;
     }
   },
   computed: {
-    ...mapState(["recipes"])
+    ...mapState(["recipes"]),
+    ...mapGetters(["recipeById"])
   },
   methods: {
     ...mapActions(["addRecipe", "editRecipe"]),
@@ -109,10 +107,11 @@ export default {
     },
     editRecipes() {
       this.editRecipe({
-        id: this.recipe.id,
+        id: this.id,
         title: this.title,
         ingredients: this.ingredients,
         description: this.description,
+        parentId: this.parentId,
         image: this.image
       });
       this.onClose();
@@ -130,7 +129,7 @@ export default {
       this.onClose();
     },
     onSubmit() {
-      this.recipe ? this.editRecipes() : this.addRecipes();
+      this.id ? this.editRecipes() : this.addRecipes();
     }
   }
 };

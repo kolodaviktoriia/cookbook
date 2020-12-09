@@ -23,16 +23,7 @@
         </div>
       </div>
     </div>
-    <ModalRecipe
-      v-if="isOpen"
-      :close="closeModal"
-      :idProp="recipe().id"
-      :titleProp="recipe().title"
-      :descriptionProp="recipe().description"
-      :ingredientsProp="recipe().ingredients"
-      :createdAtProp="recipe().createdAt"
-      :imageProp="recipe().image"
-    />
+    <ModalRecipe v-if="isOpen" :close="closeModal" :id="recipe().id" />
   </div>
 </template>
 
@@ -48,8 +39,7 @@ export default {
   },
   data() {
     return {
-      isOpen: false,
-      imageRecipe: defaultImage
+      isOpen: false
     };
   },
   props: {
@@ -66,7 +56,6 @@ export default {
   methods: {
     recipe() {
       if (this.$route.params.id) {
-        console.log(this.$route.params.id);
         const recipe = this.recipeById(this.$route.params.id);
         recipe.image = this.imageExists(recipe.image) ? recipe.image : defaultImage;
         return recipe;
@@ -83,10 +72,8 @@ export default {
     },
     imageExists(url) {
       const http = new XMLHttpRequest();
-
       http.open("HEAD", url, false);
       http.send();
-
       return http.status !== 404;
     },
     showModal() {
