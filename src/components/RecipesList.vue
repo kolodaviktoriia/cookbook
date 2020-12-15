@@ -1,6 +1,5 @@
 <template>
   <div class="recipesList">
-    <h3 @click="showAllRecipes" class="all-header">All recipes</h3>
     <ul>
       <RecipesTree
         v-for="(recipe, index) in recipes"
@@ -40,20 +39,11 @@ ul {
   list-style-type: disc;
 }
 .recipesList {
-  max-height: 70vh;
-  width: 20%;
   overflow: auto;
   background: #fff;
-  border-radius: 5px;
-  margin-right: 10%;
+  margin-right: 10px;
 }
 .all-header {
   cursor: pointer;
-}
-@media (max-width: 900px) {
-  .recipesList {
-    width: 30%;
-    margin-right: 5%;
-  }
 }
 </style>

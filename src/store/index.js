@@ -6,7 +6,7 @@ export default createStore({
       {
         id: "6e30db04-364a-11eb-adc1-0242ac120002",
         image:
-          "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/recipe-image-legacy-id-1273477_8-ad36e3b.jpg?quality=90&webp=true&resize=300,272",
+          "https://lh3.googleusercontent.com/proxy/cormz1e9ftErYZ_WpA0KRosuY6JJUljLcCDPka3IoRTuylxQhXiTyro_o-bWtoX0eDaWr-1lY4LS9av11ucSyNYWTlIGI3IJwElhJpp4SdF4ERbpesSynINxGlTqjoL7MKv-4Ms",
         title: "Easy pancakes",
         ingredients: "flour, eggs, milk, oil, lemon, sugar",
         description:

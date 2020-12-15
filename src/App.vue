@@ -1,34 +1,24 @@
 <template>
   <div id="wrapper">
-    <div id="header">
-      <img src="./assets/logo.png" id="logo" />
-      Cookbook
-    </div>
+    <Header />
     <router-view />
   </div>
 </template>
 <script>
-export default {};
+import Header from "@/components/Header.vue";
+
+export default {
+  name: "Home",
+  components: {
+    Header
+  }
+};
 </script>
 <style lang="scss">
-#logo {
-  width: 90px;
-  height: 90px;
-}
 #wrapper {
   padding: 50px 150px 0px 150px;
 }
 
-#header {
-  padding: 20px;
-  border-radius: 5px;
-  background: #ffff;
-  display: flex;
-  flex-flow: row;
-  font-size: 5em;
-  font-weight: bold;
-  color: #262626;
-}
 @media (max-width: 1120px) {
   #wrapper {
     padding: 10px 50px 0px 50px;
@@ -38,13 +28,6 @@ export default {};
 @media (max-width: 680px) {
   #wrapper {
     padding: 10px 10px 0px 10px;
-  }
-  #header {
-    font-size: 3em;
-  }
-  #logo {
-    width: 60px;
-    height: 60px;
   }
 }
 

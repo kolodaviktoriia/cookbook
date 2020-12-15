@@ -1,39 +1,19 @@
 <template>
-  <div class="home">
-    <AddRecipe />
-    <div class="main">
-      <RecipesList :recipes="recipesTree" />
-      <div class="recipesBlock">
-        <router-view />
-      </div>
-    </div>
+  <div class="main">
+    <router-view />
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import AddRecipe from "@/components/AddRecipe.vue";
-import RecipesList from "@/components/RecipesList.vue";
-
 export default {
-  name: "Home",
-  components: {
-    AddRecipe,
-    RecipesList
-  },
-  computed: {
-    ...mapGetters(["recipesTree"])
-  }
+  name: "Home"
 };
 </script>
 <style lang="scss">
 .main {
-  display: flex;
-}
-.recipesBlock {
+  margin-top: 50px;
   display: flex;
   overflow: auto;
-  width: 70%;
   max-height: 70vh;
   flex-direction: column;
 }

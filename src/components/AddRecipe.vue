@@ -1,8 +1,11 @@
 <template>
   <div class="addRecipes">
     <div class="btnWrap">
-      <button @click="showModal" class="btnOpen">Add recipe</button>
+      <button @click="showModal" type="button" class="btn btn-outline-secondary">
+        Add recipe
+      </button>
     </div>
+    <div></div>
     <ModalRecipe v-if="isOpen" :close="closeModal" />
   </div>
 </template>
@@ -32,26 +35,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.btnOpen {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  font-weight: bold;
-  padding: 10px;
-  cursor: pointer;
-  border: none;
-}
 .btnWrap {
-  margin-left: auto;
-  width: 100px;
-}
-.btnOpen {
-  background: #ffff;
   margin: 10px 10px 10px auto;
-  height: 50px;
-  width: 100px;
-  border: 2px solid #7a75756e;
-}
-
-.btnOpen:hover {
-  background: #dededeb8;
+  width: 105px;
 }
 </style>
