@@ -104,7 +104,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .imgWrap {
   width: 90%;
   height: 200px;

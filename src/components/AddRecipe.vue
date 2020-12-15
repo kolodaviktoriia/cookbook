@@ -31,7 +31,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .btnOpen {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   font-weight: bold;

@@ -10,7 +10,7 @@
 <script>
 export default {};
 </script>
-<style>
+<style lang="scss">
 #logo {
   width: 90px;
   height: 90px;
@@ -25,9 +25,6 @@ export default {};
   background: #ffff;
   display: flex;
   flex-flow: row;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   font-size: 5em;
   font-weight: bold;
   color: #262626;
