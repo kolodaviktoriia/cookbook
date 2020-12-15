@@ -36,13 +36,7 @@ export default createStore({
       }
       const roots = state.recipes.filter(r => r.parentId === null);
       const result = roots.map(r => ({
-        id: r.id,
-        image: r.image,
-        title: r.title,
-        ingredients: r.ingredients,
-        description: r.description,
-        createdAt: r.createdAt,
-        parentId: null,
+        ...r,
         children: buildTree(state.recipes, r.id)
       }));
       return result;
