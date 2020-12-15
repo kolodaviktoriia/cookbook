@@ -2,8 +2,8 @@
   <div class="recipe">
     <div class="recipe-wrapper">
       <div class="title-recipe">
-        <div class="recipeDate">{{ recipe().createdAt }}</div>
-        {{ recipe().title }}
+        <div class="recipeDate">{{ recipe.createdAt }}</div>
+        {{ recipe.title }}
         <div class="addRecipes">
           <div class="btnWrap">
             <button @click="showModal" class="btnOpen">Edit</button>
@@ -13,17 +13,17 @@
       <div class="main-recipe">
         <div class="ingredients-recipe">
           <div class="imgWrap">
-            <img :src="recipe().image" class="recipeImg" />
+            <img :src="imageRecipe" class="recipeImg" />
           </div>
           <h3 class="title">Ingredients</h3>
-          {{ recipe().ingredients }}
+          {{ recipe.ingredients }}
         </div>
         <div class="description-recipe">
-          {{ recipe().description }}
+          {{ recipe.description }}
         </div>
       </div>
     </div>
-    <ModalRecipe v-if="isOpen" :close="closeModal" :id="recipe().id" />
+    <ModalRecipe v-if="isOpen" :close="closeModal" :id="recipe.id" />
   </div>
 </template>
 
@@ -69,25 +69,26 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["recipeById"])
-  },
-  methods: {
+    ...mapGetters(["recipeById"]),
+    imageRecipe() {
+      return this.imageExists(this.image) ? this.image : defaultImage;
+    },
     recipe() {
       if (this.$route.params.id) {
         const recipe = this.recipeById(this.$route.params.id);
-        recipe.image = this.imageExists(recipe.image) ? recipe.image : defaultImage;
         return recipe;
       }
-      const image = this.imageExists(this.image) ? this.image : defaultImage;
       return {
         id: this.id,
         title: this.title,
         description: this.description,
         ingredients: this.ingredients,
         createdAt: this.createdAt,
-        image
+        image: this.image
       };
-    },
+    }
+  },
+  methods: {
     imageExists(url) {
       const http = new XMLHttpRequest();
       http.open("HEAD", url, false);
