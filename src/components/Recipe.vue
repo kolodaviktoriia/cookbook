@@ -13,7 +13,7 @@
       <div class="main-recipe">
         <div class="ingredients-recipe">
           <div class="imgWrap">
-            <img :src="imageRecipe" class="recipeImg" />
+            <img :src="recipe.image" class="recipeImg" />
           </div>
           <h3 class="title">Ingredients</h3>
           {{ recipe.ingredients }}
@@ -30,7 +30,6 @@
 <script>
 import { mapGetters } from "vuex";
 import ModalRecipe from "@/components/ModalRecipe.vue";
-import defaultImage from "@/assets/default.png";
 
 export default {
   name: "Recipe",
@@ -45,7 +44,7 @@ export default {
   props: {
     id: {
       type: String,
-      default: undefined
+      default: ""
     },
     title: {
       type: String,
@@ -70,13 +69,9 @@ export default {
   },
   computed: {
     ...mapGetters(["recipeById"]),
-    imageRecipe() {
-      return this.imageExists(this.image) ? this.image : defaultImage;
-    },
     recipe() {
       if (this.$route.params.id) {
-        const recipe = this.recipeById(this.$route.params.id);
-        return recipe;
+        return this.recipeById(this.$route.params.id);
       }
       return {
         id: this.id,
@@ -89,12 +84,6 @@ export default {
     }
   },
   methods: {
-    imageExists(url) {
-      const http = new XMLHttpRequest();
-      http.open("HEAD", url, false);
-      http.send();
-      return http.status !== 404;
-    },
     showModal() {
       this.isOpen = true;
     },

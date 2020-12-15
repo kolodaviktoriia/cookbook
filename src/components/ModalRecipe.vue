@@ -60,6 +60,7 @@
 <script>
 import { mapActions, mapState, mapGetters } from "vuex";
 import { uuid } from "vue-uuid";
+import defaultImage from "@/assets/default.png";
 
 export default {
   name: "ModalRecipe",
@@ -116,7 +117,7 @@ export default {
         ingredients: this.ingredients,
         description: this.description,
         parentId: this.parentId,
-        image: this.image
+        image: this.imageExists(this.image) ? this.image : defaultImage
       });
       this.onClose();
     },
@@ -124,13 +125,19 @@ export default {
       this.addRecipe({
         id: uuid.v1(),
         title: this.title,
-        image: this.image,
+        image: this.imageExists(this.image) ? this.image : defaultImage,
         ingredients: this.ingredients,
         description: this.description,
         createdAt: new Date().toLocaleString(),
         parentId: this.parentId
       });
       this.onClose();
+    },
+    imageExists(url) {
+      const http = new XMLHttpRequest();
+      http.open("HEAD", url, false);
+      http.send();
+      return http.status !== 404;
     },
     onSubmit() {
       this.id ? this.editRecipes() : this.addRecipes();
