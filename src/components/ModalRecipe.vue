@@ -18,7 +18,6 @@
             <label class="input-label">Ingredients:</label>
             <textarea
               class="input-ingredients"
-              type="text"
               placeholder="Add ingredients"
               v-model="ingredients"
             />
@@ -27,7 +26,6 @@
             <label class="input-label">Description:</label>
             <textarea
               class="input-description"
-              type="text"
               placeholder="Add description"
               v-model="description"
             />
@@ -71,7 +69,7 @@ export default {
       default: ""
     },
     close: {
-      type: String,
+      type: Function,
       default: undefined
     }
   },
