@@ -66,8 +66,14 @@ import { uuid } from "vue-uuid";
 export default {
   name: "ModalRecipe",
   props: {
-    id: String,
-    close: Function
+    id: {
+      type: String,
+      default: ""
+    },
+    close: {
+      type: String,
+      default: undefined
+    }
   },
   data() {
     return {

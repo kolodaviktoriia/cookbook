@@ -7,7 +7,7 @@
       :title="recipe.title"
       :description="recipe.description"
       :ingredients="recipe.ingredients"
-      :createdAt="recipe.createdAt"
+      :created-at="recipe.createdAt"
       :image="recipe.image"
     />
   </div>

@@ -43,12 +43,30 @@ export default {
     };
   },
   props: {
-    id: String,
-    title: String,
-    description: String,
-    ingredients: String,
-    createdAt: String,
-    image: String
+    id: {
+      type: String,
+      default: undefined
+    },
+    title: {
+      type: String,
+      default: ""
+    },
+    description: {
+      type: String,
+      default: ""
+    },
+    ingredients: {
+      type: String,
+      default: ""
+    },
+    createdAt: {
+      type: String,
+      default: ""
+    },
+    image: {
+      type: String,
+      default: ""
+    }
   },
   computed: {
     ...mapGetters(["recipeById"])

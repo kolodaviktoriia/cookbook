@@ -5,8 +5,8 @@
     </div>
     <ul v-if="children">
       <RecipesTree
-        v-for="(child, index) in children"
-        :key="index"
+        v-for="(child, id) in children"
+        :key="id"
         :index="child.id"
         :title="child.title"
         :children="child.children"
@@ -19,9 +19,18 @@
 export default {
   name: "RecipesTree",
   props: {
-    index: String,
-    title: String,
-    children: Array
+    index: {
+      type: String,
+      default: ""
+    },
+    title: {
+      type: String,
+      default: ""
+    },
+    children: {
+      type: Array,
+      default: undefined
+    }
   },
   methods: {
     showRecipeDetailes(index) {

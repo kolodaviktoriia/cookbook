@@ -19,7 +19,10 @@ import RecipesTree from "@/components/RecipesTree.vue";
 export default {
   name: "RecipesList",
   props: {
-    recipes: Array
+    recipes: {
+      type: Array,
+      default: undefined
+    }
   },
   components: {
     RecipesTree
