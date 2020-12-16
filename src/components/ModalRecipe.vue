@@ -146,7 +146,7 @@ export default {
         parentId: this.parentIdModel,
         createdAt: this.createdAt ?? new Date().toLocaleString()
       });
-      this.onClose();
+      this.$emit("on-close");
     }
   }
 };
