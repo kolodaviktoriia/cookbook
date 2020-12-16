@@ -7,6 +7,7 @@
         :index="recipe.id"
         :title="recipe.title"
         :children="recipe.children"
+        label="Edit recipe"
       />
     </ul>
   </div>

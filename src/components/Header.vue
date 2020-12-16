@@ -47,9 +47,8 @@
           </ul>
         </div>
       </nav>
-      <div></div>
-      <ModalRecipe v-if="isOpen" :close="closeModal" />
     </div>
+    <ModalRecipe v-if="isOpen" @on-close="closeModal" @on-submit="submitModal" />
   </div>
 </template>
 
@@ -57,7 +56,7 @@
 import ModalRecipe from "@/components/ModalRecipe.vue";
 import RecipesList from "@/components/RecipesList.vue";
 import logo from "@/assets/logo.png";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "Header",
@@ -75,11 +74,15 @@ export default {
     ...mapGetters(["recipesTree"])
   },
   methods: {
+    ...mapActions(["addRecipe"]),
     showModal() {
       this.isOpen = true;
     },
     closeModal() {
       this.isOpen = false;
+    },
+    submitModal(recipe) {
+      this.addRecipe(recipe);
     },
     showAllRecipes() {
       this.$router.push("/");

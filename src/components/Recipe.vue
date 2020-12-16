@@ -16,12 +16,25 @@
         </button>
       </div>
     </div>
-    <ModalRecipe v-if="isOpen" :close="closeModal" :id="recipe.id" />
+    <ModalRecipe
+      v-if="isOpen"
+      @on-close="closeModal"
+      @on-submit="submitModal"
+      :id="recipe.id"
+      :title="recipe.title"
+      :description="recipe.description"
+      :ingredients="recipe.ingredients"
+      :created-at="recipe.createdAt"
+      :image="recipe.image"
+      :parent-id="recipe.parentId"
+      label="Edit recipe"
+      title-modal="Edit recipe"
+    />
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import ModalRecipe from "@/components/ModalRecipe.vue";
 
 export default {
@@ -58,6 +71,10 @@ export default {
     image: {
       type: String,
       default: ""
+    },
+    parentId: {
+      type: String,
+      default: ""
     }
   },
   computed: {
@@ -72,16 +89,21 @@ export default {
         description: this.description,
         ingredients: this.ingredients,
         createdAt: this.createdAt,
-        image: this.image
+        image: this.image,
+        parentId: this.parentId
       };
     }
   },
   methods: {
+    ...mapActions(["editRecipe"]),
     showModal() {
       this.isOpen = true;
     },
     closeModal() {
       this.isOpen = false;
+    },
+    submitModal(recipe) {
+      this.editRecipe(recipe);
     }
   }
 };

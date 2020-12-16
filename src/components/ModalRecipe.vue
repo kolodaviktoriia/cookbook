@@ -11,18 +11,18 @@
           <div class="modal-body">
             <div class="input-div">
               <label class="input-label">Title:</label>
-              <input class="input-title" type="text" placeholder="Add title" v-model="title" />
+              <input class="input-title" type="text" placeholder="Add title" v-model="titleModel" />
             </div>
             <div class="input-div">
               <label class="input-label">Image (link):</label>
-              <input class="input-title" type="text" placeholder="Add link" v-model="image" />
+              <input class="input-title" type="text" placeholder="Add link" v-model="imageModel" />
             </div>
             <div class="input-div">
               <label class="input-label">Ingredients:</label>
               <textarea
                 class="input-ingredients"
                 placeholder="Add ingredients"
-                v-model="ingredients"
+                v-model="ingredientsModel"
               />
             </div>
             <div class="input-div">
@@ -30,12 +30,12 @@
               <textarea
                 class="input-description"
                 placeholder="Add description"
-                v-model="description"
+                v-model="descriptionModel"
               />
             </div>
             <div v-if="!id" class="input-div">
               <label class="input-label">Parent recipe:</label>
-              <select v-model="parentId" class="input-parent">
+              <select v-model="parentIdModel" class="input-parent">
                 <option :value="null" disabled selected hidden>None</option>
                 <option v-for="recipe in recipes" :key="recipe.id" :value="recipe.id">
                   {{ recipe.title }}
@@ -51,7 +51,7 @@
               @click="onSubmit"
               type="button"
               class="btn btn-outline-secondary"
-              :disabled="!(title && ingredients && description && image)"
+              :disabled="!(titleModel && ingredientsModel && descriptionModel && imageModel)"
             >
               {{ label }}
             </button>
@@ -63,7 +63,7 @@
 </template>
 
 <script>
-import { mapActions, mapState, mapGetters } from "vuex";
+import { mapState } from "vuex";
 import { uuid } from "vue-uuid";
 import defaultImage from "@/assets/default.png";
 
@@ -72,71 +72,63 @@ export default {
   props: {
     id: {
       type: String,
+      default: null
+    },
+    title: {
+      type: String,
       default: ""
     },
-    close: {
-      type: Function,
-      default: undefined
+    description: {
+      type: String,
+      default: ""
+    },
+    ingredients: {
+      type: String,
+      default: ""
+    },
+    createdAt: {
+      type: String,
+      default: null
+    },
+    image: {
+      type: String,
+      default: ""
+    },
+    parentId: {
+      type: String,
+      default: null
+    },
+    label: {
+      type: String,
+      default: "Add recipe"
+    },
+    titleModal: {
+      type: String,
+      default: "Add new recipe"
     }
   },
   data() {
     return {
-      title: "",
-      ingredients: "",
-      description: "",
-      parentId: null,
-      image: "",
-      titleModal: "Add new recipe",
-      label: "Add recipe"
+      titleModel: "",
+      ingredientsModel: "",
+      descriptionModel: "",
+      parentIdModel: null,
+      imageModel: ""
     };
   },
   mounted() {
-    if (this.id) {
-      const recipe = this.recipeById(this.id);
-      this.label = "Edit recipe";
-      this.titleModal = "Edit recipe";
-      this.title = recipe.title;
-      this.ingredients = recipe.ingredients;
-      this.description = recipe.description;
-      this.image = recipe.image;
-      this.parentId = recipe.parentId;
-    }
+    this.titleModel = this.title;
+    this.ingredientsModel = this.ingredients;
+    this.descriptionModel = this.description;
+    this.imageModel = this.image;
+    this.parentIdModel = this.parentId;
   },
   computed: {
-    ...mapState(["recipes"]),
-    ...mapGetters(["recipeById"])
+    ...mapState(["recipes"])
   },
   methods: {
-    ...mapActions(["addRecipe", "editRecipe"]),
     onClose() {
-      this.title = "";
-      this.ingredients = "";
-      this.description = "";
-      this.parentId = null;
-      this.close();
-    },
-    editRecipes() {
-      this.editRecipe({
-        id: this.id,
-        title: this.title,
-        ingredients: this.ingredients,
-        description: this.description,
-        parentId: this.parentId,
-        image: this.imageExists(this.image) ? this.image : defaultImage
-      });
-      this.onClose();
-    },
-    addRecipes() {
-      this.addRecipe({
-        id: uuid.v1(),
-        title: this.title,
-        image: this.imageExists(this.image) ? this.image : defaultImage,
-        ingredients: this.ingredients,
-        description: this.description,
-        createdAt: new Date().toLocaleString(),
-        parentId: this.parentId
-      });
-      this.onClose();
+      this.$emit("on-close");
     },
     imageExists(url) {
       const http = new XMLHttpRequest();
@@ -145,7 +137,16 @@ export default {
       return http.status !== 404;
     },
     onSubmit() {
-      this.id ? this.editRecipes() : this.addRecipes();
+      this.$emit("on-submit", {
+        id: this.id ?? uuid.v1(),
+        title: this.titleModel,
+        image: this.imageExists(this.imageModel) ? this.imageModel : defaultImage,
+        ingredients: this.ingredientsModel,
+        description: this.descriptionModel,
+        parentId: this.parentIdModel,
+        createdAt: this.createdAt ?? new Date().toLocaleString()
+      });
+      this.onClose();
     }
   }
 };

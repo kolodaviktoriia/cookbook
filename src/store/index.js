@@ -1,12 +1,11 @@
 import { createStore } from "vuex";
-
+import test from "@/assets/test.jpg";
 export default createStore({
   state: {
     recipes: [
       {
         id: "6e30db04-364a-11eb-adc1-0242ac120002",
-        image:
-          "https://lh3.googleusercontent.com/proxy/cormz1e9ftErYZ_WpA0KRosuY6JJUljLcCDPka3IoRTuylxQhXiTyro_o-bWtoX0eDaWr-1lY4LS9av11ucSyNYWTlIGI3IJwElhJpp4SdF4ERbpesSynINxGlTqjoL7MKv-4Ms",
+        image: test,
         title: "Easy pancakes",
         ingredients: "flour, eggs, milk, oil, lemon, sugar",
         description:

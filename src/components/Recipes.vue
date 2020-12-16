@@ -9,6 +9,7 @@
       :ingredients="recipe.ingredients"
       :created-at="recipe.createdAt"
       :image="recipe.image"
+      :parent-id="recipe.parentId"
     />
   </div>
 </template>
