@@ -25,10 +25,10 @@ describe("RecipesTree.vue", () => {
     expect(wrapper.vm.children).toEqual(test.children);
   });
 
-  it('check redirect to recipe', () => {
-     const mockRouter = {
+  it("check redirect to recipe", () => {
+    const mockRouter = {
       push: jest.fn()
-    }
+    };
     const test = {
       index: "test1",
       title: "testTitle1",
@@ -45,16 +45,17 @@ describe("RecipesTree.vue", () => {
         }
       ]
     };
-    const wrapper = shallowMount(RecipesTree, { props: test,
+    const wrapper = shallowMount(RecipesTree, {
+      props: test,
       global: {
         mocks: {
           $router: mockRouter
         }
       }
-    })
+    });
 
-    wrapper.find('div').trigger('click')
+    wrapper.find("div").trigger("click");
 
-    expect(mockRouter.push).toHaveBeenCalledWith('/recipe/test1')
-  })
+    expect(mockRouter.push).toHaveBeenCalledWith("/recipe/test1");
+  });
 });

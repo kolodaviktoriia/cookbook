@@ -26,11 +26,6 @@ export default {
   },
   components: {
     RecipesTree
-  },
-  methods: {
-    showAllRecipes() {
-      this.$router.push("/");
-    }
   }
 };
 </script>
