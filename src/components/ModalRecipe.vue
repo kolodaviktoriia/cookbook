@@ -153,9 +153,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.addRecipes {
-  margin: 10px 150px;
-}
 .input-title,
 .input-parent,
 .input-description,

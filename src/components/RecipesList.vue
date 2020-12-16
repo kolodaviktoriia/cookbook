@@ -39,7 +39,4 @@ ul {
   background: #fff;
   margin-right: 10px;
 }
-.all-header {
-  cursor: pointer;
-}
 </style>
